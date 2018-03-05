@@ -1,4 +1,4 @@
-use std::ops::{Generator, GeneratorState};
+use core::ops::{Generator, GeneratorState};
 
 use __rt::pin_api::{PinMut, Unpin};
 

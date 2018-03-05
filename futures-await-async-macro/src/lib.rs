@@ -530,8 +530,8 @@ impl Fold for ExpandAsyncFor {
                     match r? {
                         ::futures::__rt::Async::Ready(e) => {
                             match e {
-                                ::futures::__rt::std::option::Option::Some(e) => e,
-                                ::futures::__rt::std::option::Option::None => break,
+                                ::futures::__rt::core::option::Option::Some(e) => e,
+                                ::futures::__rt::core::option::Option::None => break,
                             }
                         }
                         ::futures::__rt::Async::Pending => {

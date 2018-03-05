@@ -1,3 +1,5 @@
+#![no_std]
+
 /// Ye Olde Await Macro
 ///
 /// Basically a translation of polling to yielding. This crate's macro is
@@ -20,12 +22,12 @@ macro_rules! await {
                 ::futures::__rt::in_ctx(|ctx| ::futures::__rt::StableFuture::poll(pin, ctx))
             };
             match poll {
-                ::futures::__rt::std::result::Result::Ok(::futures::__rt::Async::Ready(e)) => {
-                    break ::futures::__rt::std::result::Result::Ok(e)
+                ::futures::__rt::core::result::Result::Ok(::futures::__rt::Async::Ready(e)) => {
+                    break ::futures::__rt::core::result::Result::Ok(e)
                 }
-                ::futures::__rt::std::result::Result::Ok(::futures::__rt::Async::Pending) => {}
-                ::futures::__rt::std::result::Result::Err(e) => {
-                    break ::futures::__rt::std::result::Result::Err(e)
+                ::futures::__rt::core::result::Result::Ok(::futures::__rt::Async::Pending) => {}
+                ::futures::__rt::core::result::Result::Err(e) => {
+                    break ::futures::__rt::core::result::Result::Err(e)
                 }
             }
             yield ::futures::__rt::Async::Pending
@@ -44,12 +46,12 @@ macro_rules! await_item {
         loop {
             let poll = ::futures::__rt::in_ctx(|ctx| ::futures::Stream::poll_next(&mut $e, ctx));
             match poll {
-                ::futures::__rt::std::result::Result::Ok(::futures::__rt::Async::Ready(e)) => {
-                    break ::futures::__rt::std::result::Result::Ok(e)
+                ::futures::__rt::core::result::Result::Ok(::futures::__rt::Async::Ready(e)) => {
+                    break ::futures::__rt::core::result::Result::Ok(e)
                 }
-                ::futures::__rt::std::result::Result::Ok(::futures::__rt::Async::Pending) => {}
-                ::futures::__rt::std::result::Result::Err(e) => {
-                    break ::futures::__rt::std::result::Result::Err(e)
+                ::futures::__rt::core::result::Result::Ok(::futures::__rt::Async::Pending) => {}
+                ::futures::__rt::core::result::Result::Err(e) => {
+                    break ::futures::__rt::core::result::Result::Err(e)
                 }
             }
 
