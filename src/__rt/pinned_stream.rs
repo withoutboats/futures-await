@@ -1,5 +1,5 @@
-use std::ops::{Generator, GeneratorState};
-use std::marker::PhantomData;
+use core::ops::{Generator, GeneratorState};
+use core::marker::PhantomData;
 
 use __rt::pin_api::{PinMut, Unpin};
 use futures::task;

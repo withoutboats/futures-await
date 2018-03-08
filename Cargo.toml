@@ -24,3 +24,28 @@ futures-await-await-macro = { path = "futures-await-await-macro", version = "0.2
 futures = "0.2.0-alpha"
 futures-stable = "0.2.0-alpha"
 pin-api = "0.1.1"
+
+[features]
+std = ["futures/std", "futures-stable/std", "pin-api/std"]
+default = ["std"]
+
+# Required patch to actually build `futures-executor` on targets that don't
+# provide a `std` crate
+#
+# https://github.com/rust-lang-nursery/futures-rs/commit/7010da42123149c1ec5a00763df2a6cac33d9b4f
+#
+# Would just patch `futures-executor`, but unfortunately that then depends on
+# the git built copies of `futures-core` etc. instead of the ones from
+# crates.io, so have to patch the entire `futures` tree.
+#
+# Then, because `futures-stable` individually depends on `futures-core` and
+# `futures-executor` instead of the facade, need to patch them as well.
+[patch.crates-io.futures]
+git = "https://github.com/rust-lang-nursery/futures-rs"
+branch = "master"
+[patch.crates-io.futures-core]
+git = "https://github.com/rust-lang-nursery/futures-rs"
+branch = "master"
+[patch.crates-io.futures-executor]
+git = "https://github.com/rust-lang-nursery/futures-rs"
+branch = "master"
